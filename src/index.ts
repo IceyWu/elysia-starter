@@ -2,8 +2,10 @@ import { Elysia } from "elysia";
 import { swagger } from "@elysiajs/swagger";
 import { UserController } from "./controllers/UserController";
 import { AuthController } from "./controllers/AuthController";
+import { FileController } from "./controllers/FileController";
 import { isAuthenticated } from "./utils/isAuthenticated";
 import { showInfo } from './utils/info'
+import { cors } from '@elysiajs/cors'
 const app = new Elysia();
 
 app.get("/", () => "Hello Elysia Starter");
@@ -26,8 +28,9 @@ app.use(
 );
 app.use(AuthController);
 app.group("/user", (route) => route.use(isAuthenticated).use(UserController));
+app.group("/file", (route) => route.use(FileController));
 
-app.listen(3000);
+app.use(cors()).listen(3000);
 
 // show info
 showInfo(app)
