@@ -6,6 +6,8 @@ import { FileController } from "./controllers/FileController";
 import { isAuthenticated } from "./utils/isAuthenticated";
 import { showInfo } from './utils/info'
 import { cors } from '@elysiajs/cors'
+import { staticPlugin } from '@elysiajs/static' // 引入静态文件服务插件
+
 const app = new Elysia();
 
 app.get("/", () => "Hello Elysia Starter");
@@ -29,6 +31,12 @@ app.use(
 app.use(AuthController);
 app.group("/user", (route) => route.use(isAuthenticated).use(UserController));
 app.group("/file", (route) => route.use(FileController));
+
+// 添加静态文件服务
+app.use(staticPlugin({
+  prefix: '/upload', // 访问前缀
+  assets: 'upload' // 静态文件目录
+}));
 
 app.use(cors()).listen(3000);
 
