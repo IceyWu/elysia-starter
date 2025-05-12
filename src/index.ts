@@ -24,13 +24,15 @@ app.use(
       tags: [
         { name: "App", description: "General endpoints" },
         { name: "Auth", description: "Authentication endpoints" },
+        { name: "User", description: "User endpoints" },
+        { name: "File", description: "File endpoints" },
       ],
     },
   })
 );
 app.use(AuthController);
 app.group("/user", (route) => route.use(isAuthenticated).use(UserController));
-app.group("/file", (route) => route.use(FileController));
+app.group("/file", (route) => route.use(FileController),);
 
 // 添加静态文件服务
 app.use(staticPlugin({

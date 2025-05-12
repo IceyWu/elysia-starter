@@ -4,26 +4,30 @@ import { userIdDTO, userEditDTO } from "../dto/user.dto";
 import { isAuthenticated } from "../utils/isAuthenticated";
 
 export const UserController = new Elysia()
-
   .use(isAuthenticated)
-  .get("/", async ({ set }) => {
-    const users = await db.user.findMany({
-      select: {
-        id: true,
-        name: true,
-        email: true,
-        password: true,
-      },
-    });
+  .get(
+    "/",
+    async ({ set }) => {
+      const users = await db.user.findMany({
+        select: {
+          id: true,
+          name: true,
+          email: true,
+          password: true,
+        },
+      });
 
-    set.status = 200;
-    return {
-      success: true,
-      message: "users",
-      data: users,
-    };
-  })
-
+      set.status = 200;
+      return {
+        success: true,
+        message: "users",
+        data: users,
+      };
+    },
+    {
+      tags: ["User"],
+    }
+  )
   //get user by id
   .get(
     "/:id",
@@ -61,9 +65,9 @@ export const UserController = new Elysia()
         set.status = 200;
         console.log("after handle");
       },
+      tags: ["User"],
     }
   )
-
   //update user
   .put(
     "/update/:id",
@@ -107,9 +111,9 @@ export const UserController = new Elysia()
     {
       params: userIdDTO,
       body: userEditDTO,
+      tags: ["User"],
     }
   )
-
   //delete user
   .delete(
     "/delete/:id",
@@ -149,5 +153,6 @@ export const UserController = new Elysia()
     },
     {
       params: userIdDTO,
+      tags: ["User"],
     }
   );

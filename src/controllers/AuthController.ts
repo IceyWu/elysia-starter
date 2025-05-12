@@ -100,7 +100,7 @@ export const AuthController = new Elysia()
     },
     {
       body: userDTO,
-      // body: User,
+      tags: ["Auth"],
     }
   )
   .post(
@@ -167,6 +167,7 @@ export const AuthController = new Elysia()
     },
     {
       body: userLoginDTO,
+      tags: ["Auth"],
     }
   )
   .post("logout", async ({ removeCookie, set }) => {
@@ -178,4 +179,7 @@ export const AuthController = new Elysia()
       message: "logout success",
       data: null,
     };
+  },
+  {
+    tags: ["Auth"],
   });
