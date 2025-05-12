@@ -6,7 +6,7 @@ export const showInfo = (app: Elysia) => {
   console.log(
     bold(
       green(
-        `👏欢迎使用${blue(
+        `👏 欢迎使用${blue(
           '[elysia-starter]',
         )}，如果您感觉不错，记得点击后面链接给个star哦💖 ${underline('https://github.com/IceyWu/elysia-starter')}
         `,
@@ -16,7 +16,7 @@ export const showInfo = (app: Elysia) => {
   console.log(
     bold(
       green(
-        `🎉${blue('[Run Port]')}: Elysia is running at ${underline(`${app.server?.hostname}:${app.server?.port}`)}
+        `🎉 ${blue('[Run Port]')}: Elysia is running at ${underline(`${app.server?.hostname}:${app.server?.port}`)}
     `,
       ),
     ),
@@ -24,7 +24,15 @@ export const showInfo = (app: Elysia) => {
   console.log(
     bold(
       green(
-        `🎉${blue('[API-doc]')}: ${underline(`http://localhost:${app.server?.port}/reference`)}
+        `📄 ${blue('[API-doc]')}: ${underline(`http://localhost:${app.server?.port}/reference`)}
+    `,
+      ),
+    ),
+  )
+  console.log(
+    bold(
+      green(
+        `🖼️ ${blue('[File-serve]')}: ${underline(`http://localhost:${app.server?.port}/upload/avatar.jpg`)}
     `,
       ),
     ),
